@@ -20,11 +20,19 @@
         h1 {
             margin-bottom: 20px;
         }
+        .token-link {
+            margin-top: 20px;
+            color: blue;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Registration Form</h1>
+    @if (session('success'))
+        <div>{{ session('success') }}</div>
+    @endif
     <div>
         <form action="{{ route('register.store') }}" method="POST">
             @csrf
@@ -40,6 +48,11 @@
                 <button type="submit">Register</button>
             </div>
         </form>
+        @if (session('token'))
+            <div class="token-link">
+                <a href="{{ url('interact/' . session('token')) }}">Your registration token</a>
+            </div>
+        @endif
     </div>
 </div>
 </body>
